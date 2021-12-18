@@ -12,11 +12,31 @@ const reasons = document.getElementById('reasons')
 
 
 // .....All EventListener will go undernith here...........
-
+passwordInput.addEventListener('input',updateMeter)
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 // ......All Function will go here undernith..........
+// All Functions calling
+function updateMeter(){
+ const weaknesses = calculatePasswordStrength(passwordInput.value)
+ console.log(weaknesses)
+}
+function calculatePasswordStrength(password){
+ const weaknesses = []
+ weaknesses.push(lengthWeaknesses(password))
+ return weaknesses
+}
+// All Executive Functions
+function lengthWeaknesses(password){
+ const psLength = password.length 
+ if(psLength < 8){
+     return {
+         message: 'your password is short',
+         deduction: 30
+     }
+ }
+}
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::
 
