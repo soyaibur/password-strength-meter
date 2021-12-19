@@ -25,11 +25,14 @@ updateMeter()
 function updateMeter(){
  const weaknesses = calculatePasswordStrength(passwordInput.value)
   let strength = 100
+  reasons.innerHTML = ''
     weaknesses.forEach(weakness=>{
         if(weakness == null) return
-        
         strength= strength-weakness.deduction  
-        
+
+        const messageElement = document.createElement('div')
+        messageElement.innerText = weakness.message
+        reasons.appendChild(messageElement)
     })
     passwordMeter.style.setProperty('--strength',strength)
   
