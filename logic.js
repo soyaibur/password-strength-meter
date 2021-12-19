@@ -17,25 +17,48 @@ passwordInput.addEventListener('input',updateMeter)
 
 
 // ......All Function will go here undernith..........
+
 // All Functions calling
+updateMeter()
+
+
 function updateMeter(){
  const weaknesses = calculatePasswordStrength(passwordInput.value)
- console.log(weaknesses)
+  let strength = 100
+    weaknesses.forEach(weakness=>{
+        if(weakness == null) return
+        
+        strength= strength-weakness.deduction  
+        
+    })
+    passwordMeter.style.setProperty('--strength',strength)
+  
 }
+
 function calculatePasswordStrength(password){
  const weaknesses = []
  weaknesses.push(lengthWeaknesses(password))
  return weaknesses
 }
+
 // All Executive Functions
 function lengthWeaknesses(password){
  const psLength = password.length 
- if(psLength < 8){
+ if(psLength < 5){
      return {
          message: 'your password is short',
-         deduction: 30
+         deduction: 60
      }
- }
+ 
+    }
+
+    if(psLength > 12){
+        return{
+            message: 'You may not add any password',
+            deduction: 5
+        }
+    }
+
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -46,7 +69,7 @@ function printOut(text){
     div.innerHTML = text
     document.body.appendChild(div)
 }
-re.addEventListener('click',()=>{
+passwordMeter.addEventListener('click',()=>{
     alert("this is working")
 })
 

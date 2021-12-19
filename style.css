@@ -19,13 +19,12 @@ body{
     overflow:hidden;
 }
 .password-meter::before{
-    --strength: 12;
     content: '';
     position:absolute;
     top:0;
     left:0;
     bottom: 0;
-    width: calc(1% *  var(--strength));
+    width: calc(1% *  var(--strength,0));
     background-color: hsl(261, 80%, 81%);
     border-radius: 15px;
 }
