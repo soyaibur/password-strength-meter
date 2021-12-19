@@ -31,6 +31,7 @@ function updateMeter(){
         strength= strength-weakness.deduction  
 
         const messageElement = document.createElement('div')
+        if(weakness.message == null) return
         messageElement.innerText = weakness.message
         reasons.appendChild(messageElement)
     })
@@ -41,6 +42,7 @@ function updateMeter(){
 function calculatePasswordStrength(password){
  const weaknesses = []
  weaknesses.push(lengthWeaknesses(password))
+ weaknesses.push(lowercaseWeaknesses(password))
  return weaknesses
 }
 
@@ -63,6 +65,22 @@ function lengthWeaknesses(password){
     }
 
 }
+function lowercaseWeaknesses(password){
+    const matches = password.match(/[a-z]/g) || []
+
+    if(matches.length === 0){
+        return{
+            message:'Your password has no lowercase character',
+            deduction: 80
+        }
+    }
+    if(matches.length <= 2){
+        return{
+            messages: 'Your password could use more lowercase characters',
+            deduction: 5
+        }
+    }
+}
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -72,8 +90,8 @@ function printOut(text){
     div.innerHTML = text
     document.body.appendChild(div)
 }
-passwordMeter.addEventListener('click',()=>{
-    alert("this is working")
-})
+// passwordMeter.addEventListener('click',()=>{
+//     alert("this is working")
+// })
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
