@@ -18,7 +18,7 @@ passwordInput.addEventListener('input',updateMeter)
 
 // ......All Function will go here undernith..........
 
-// All Functions calling
+// Layer 1========================
 updateMeter()
 
 
@@ -39,14 +39,17 @@ function updateMeter(){
   
 }
 
+// Layer 2============================
 function calculatePasswordStrength(password){
  const weaknesses = []
  weaknesses.push(lengthWeaknesses(password))
  weaknesses.push(lowercaseWeaknesses(password))
+ 
  return weaknesses
 }
 
-// All Executive Functions
+// Layer 3===============
+
 function lengthWeaknesses(password){
  const psLength = password.length 
  if(psLength < 5){
@@ -65,24 +68,34 @@ function lengthWeaknesses(password){
     }
 
 }
-function lowercaseWeaknesses(password){
-    const matches = password.match(/[a-z]/g) || []
 
-    if(matches.length === 0){
-        return{
-            message:'Your password has no lowercase character',
-            deduction: 80
-        }
-    }
-    if(matches.length <= 2){
-        return{
-            messages: 'Your password could use more lowercase characters',
-            deduction: 5
-        }
-    }
+function lowercaseWeaknesses(password){
+    return characterTypeWeaknesses(password,/[a-z]/g,'lowercase character')
+}
+
+//Layer 4==========================
+
+function characterTypeWeaknesses(password,regex,type){
+   let matches = password.match(regex) || []
+   
+   if(matches.length === 0 ){
+       return {
+           message: `Your password has no ${type}`,
+           deduction: 20
+       }
+   }
+   if(matches.length === 0 ){
+       return {
+           message:`Your password has no ${type}`,
+           deduction: 20
+        } 
+
+   }
 }
 
 // :::::::::::::::::::::::::::::::::::::::::::::::::::
+
+
 
 //All code will be deleted here.............
 function printOut(text){
