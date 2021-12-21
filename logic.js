@@ -45,11 +45,13 @@ function calculatePasswordStrength(password){
  weaknesses.push(lengthWeaknesses(password))
  weaknesses.push(lowercaseWeaknesses(password))
  weaknesses.push(uppercaseWeaknesses(password))
+ weaknesses.push(digitWeaknesses(password))
+ weaknesses.push( specialCharactersWeaknesses(password))
  
  return weaknesses
 }
 
-// Layer 3===============
+// Layer 3333333333333333333333333
 
 function lengthWeaknesses(password){
  const psLength = password.length 
@@ -75,10 +77,16 @@ function lowercaseWeaknesses(password){
 function uppercaseWeaknesses(password){
     return characterTypeWeaknesses(password,/[A-Z]/g,'uppercase character')
 }
+function digitWeaknesses(password){
+  return characterTypeWeaknesses(password,/[0-9]/g,'digit')
+}
+function specialCharactersWeaknesses(password){
+    return characterTypeWeaknesses(password,/[^0-9a-zA-Z\s]/g,'special Character')
+}
 
 
 
-//Layer 4==========================
+//Layer 44444444444444444444444444
 
 function characterTypeWeaknesses(password,regex,type){
    let matches = password.match(regex) || []
@@ -98,18 +106,4 @@ function characterTypeWeaknesses(password,regex,type){
    }
 }
 
-// :::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-
-//All code will be deleted here.............
-function printOut(text){
-    const div = document.createElement('div')
-    div.innerHTML = text
-    document.body.appendChild(div)
-}
-// passwordMeter.addEventListener('click',()=>{
-//     alert("this is working")
-// })
-
-// ::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+// ::::::::::::::::::::::::::::::::::::::::::::::::::
