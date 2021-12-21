@@ -44,6 +44,7 @@ function calculatePasswordStrength(password){
  const weaknesses = []
  weaknesses.push(lengthWeaknesses(password))
  weaknesses.push(lowercaseWeaknesses(password))
+ weaknesses.push(uppercaseWeaknesses(password))
  
  return weaknesses
 }
@@ -68,10 +69,14 @@ function lengthWeaknesses(password){
     }
 
 }
-
 function lowercaseWeaknesses(password){
     return characterTypeWeaknesses(password,/[a-z]/g,'lowercase character')
 }
+function uppercaseWeaknesses(password){
+    return characterTypeWeaknesses(password,/[A-Z]/g,'uppercase character')
+}
+
+
 
 //Layer 4==========================
 
